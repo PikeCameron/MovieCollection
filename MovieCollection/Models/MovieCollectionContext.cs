@@ -1,0 +1,61 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MovieCollection.Models
+{
+    public class MovieCollectionContext : DbContext
+    {
+        // constructor
+        public MovieCollectionContext (DbContextOptions<MovieCollectionContext> options) : base(options)
+        {
+            // leave blank for now
+        }
+
+        public DbSet<MovieResponse> Responses { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder mb)
+        {
+            mb.Entity<MovieResponse>().HasData(
+                   new MovieResponse
+                   {
+                       MovieId = 1,
+                       Category = "Action/Adventure",
+                       Title = "The Dark Knight",
+                       Year = 2008,
+                       Director = "Christopher Nolan",
+                       Rating = "PG-13",
+                       Edited = false,
+                       Lent_To = null,
+                       Notes = null
+                   },
+                   new MovieResponse
+                   {
+                       MovieId = 2,
+                       Category = "Action/Adventure",
+                       Title = "The Lord of the Rings: The Return of the King",
+                       Year = 2003,
+                       Director = "Peter Jackson",
+                       Rating = "PG-13",
+                       Edited = false,
+                       Lent_To = null,
+                       Notes = null
+                   },
+                   new MovieResponse
+                   {
+                       MovieId = 3,
+                       Category = "Action/Adventure",
+                       Title = "Jurassic Park 3",
+                       Year = 2001,
+                       Director = "Joe Johnston",
+                       Rating = "PG-13",
+                       Edited = false,
+                       Lent_To = null,
+                       Notes = null
+                   }
+            );
+        }
+    }
+}
