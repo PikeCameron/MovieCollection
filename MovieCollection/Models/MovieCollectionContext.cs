@@ -16,6 +16,7 @@ namespace MovieCollection.Models
 
         public DbSet<MovieResponse> Responses { get; set; }
 
+        // seeded movies
         protected override void OnModelCreating(ModelBuilder mb)
         {
             mb.Entity<MovieResponse>().HasData(

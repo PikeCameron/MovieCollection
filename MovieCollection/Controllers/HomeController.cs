@@ -25,6 +25,7 @@ namespace MovieCollection.Controllers
             return View();
         }
 
+        // movie form page
         [HttpGet]
         public IActionResult MovieApp()
         {
@@ -39,6 +40,7 @@ namespace MovieCollection.Controllers
             return View("Confirmation", ar);
         }
 
+        // podcast page
         public IActionResult Podcast()
         {
             return View();
