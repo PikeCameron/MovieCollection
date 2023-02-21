@@ -11,13 +11,13 @@ namespace MovieCollection.Models
         [Key]
         [Required]
         public int MovieId { get; set; }
-        [Required]
+        [Required (ErrorMessage = "Please enter a title")]
         public string Title { get; set; }
-        [Required]
+        [Required (ErrorMessage = "Enter a valid year")]
         public int Year { get; set; }
-        [Required]
+        [Required (ErrorMessage = "Please enter a Director name")]
         public string Director { get; set; }
-        [Required]
+        [Required (ErrorMessage = "Please enter a rating for the movie")]
         public string Rating { get; set; }
         public bool Edited { get; set; }
         public string Lent_To { get; set; }

@@ -9,7 +9,7 @@ namespace MovieCollection.Models
     public class Category
     {
         [Key]
-        [Required]
+        [Required (ErrorMessage = "Please select a valid Category")]
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
     }
