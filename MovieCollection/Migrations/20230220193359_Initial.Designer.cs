@@ -8,7 +8,7 @@ using MovieCollection.Models;
 namespace MovieCollection.Migrations
 {
     [DbContext(typeof(MovieCollectionContext))]
-    [Migration("20230213230911_Initial")]
+    [Migration("20230220193359_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,15 +17,70 @@ namespace MovieCollection.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("MovieCollection.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Television"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "VHS"
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            CategoryName = "Miscellaneous"
+                        });
+                });
+
             modelBuilder.Entity("MovieCollection.Models.MovieResponse", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -54,13 +109,15 @@ namespace MovieCollection.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Responses");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Action/Adventure",
+                            CategoryId = 1,
                             Director = "Christopher Nolan",
                             Edited = false,
                             Rating = "PG-13",
@@ -70,7 +127,7 @@ namespace MovieCollection.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Action/Adventure",
+                            CategoryId = 1,
                             Director = "Peter Jackson",
                             Edited = false,
                             Rating = "PG-13",
@@ -80,13 +137,22 @@ namespace MovieCollection.Migrations
                         new
                         {
                             MovieId = 3,
-                            Category = "Action/Adventure",
+                            CategoryId = 1,
                             Director = "Joe Johnston",
                             Edited = false,
                             Rating = "PG-13",
                             Title = "Jurassic Park 3",
                             Year = 2001
                         });
+                });
+
+            modelBuilder.Entity("MovieCollection.Models.MovieResponse", b =>
+                {
+                    b.HasOne("MovieCollection.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
